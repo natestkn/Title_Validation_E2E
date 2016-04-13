@@ -2,13 +2,51 @@
        <modelVersion>4.0.0</modelVersion>
        <groupId>core</groupId>
        <artifactId>Title_Validation_E2E</artifactId>
-       <version>${build.version}</version>
+       <version>1.1</version>
        <packaging>jar</packaging>
        <name>Title_Validation_E2E</name>
        <url>http://maven.apache.org</url>
        <properties>
          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
        </properties>
+
+      <build>
+      <plugins>
+
+        <plugin>
+         <artifactId>maven-dependency-plugin</artifactId>
+          <executions>
+              <execution>
+                <phase>install</phase>
+                <goals>
+                  <goal>copy-dependencies</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <archive>
+            <index>true</index>
+            <manifest>
+              <mainClass>core.Selenium</mainClass>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>  
+
+
+      </build> 
+
        <dependencies>
               <dependency>
                      <groupId>junit</groupId>
